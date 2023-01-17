@@ -7,7 +7,6 @@ on:
       - main
 
 jobs:
-
   define-environment:
     runs-on: ubuntu-latest
     environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
@@ -22,7 +21,7 @@ jobs:
   show-environment:
     needs: [define-environment]
     runs-on: ubuntu-latest
-        environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
+    environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
     steps:
       - name: Show Environment
         run: |
