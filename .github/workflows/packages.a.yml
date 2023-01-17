@@ -3,7 +3,7 @@ name: 'Deploy authorizer'
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'packages/authorizer/**'
 
