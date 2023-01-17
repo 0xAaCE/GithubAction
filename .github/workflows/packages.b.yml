@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./.github/workflows/reusable-workflow.yml
+    uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
     secrets:
