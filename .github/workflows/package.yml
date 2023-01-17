@@ -16,7 +16,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    enviroment: ${{ inputs.enviroment }}
+    environment: ${{ inputs.enviroment }}
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       PACKAGE: ${{ inputs.package }}
