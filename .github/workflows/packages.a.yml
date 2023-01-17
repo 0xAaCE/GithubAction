@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./reusable-workflow.yml@main
+    uses: .github/workflows/reusable-workflow.yml@main
     with:
       package: authorizer
     secrets:
