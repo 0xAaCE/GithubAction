@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  check run:
+  check_run:
     runs-on: ubuntu-latest
     steps:
       - name: 'Check run'
@@ -22,13 +22,13 @@ jobs:
           echo "githubEventName: $githubEventName"
           echo "githubEventPath: $githubEventPath"
 
-  deploy sites:
+  deploy_sites:
     uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
     secrets:
       token: este es mi doppler token dev
-  deploy authorizer:
+  deploy_authorizer:
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
