@@ -10,5 +10,6 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
+      enviroment: development
     secrets:
       token: este es mi doppler token dev
