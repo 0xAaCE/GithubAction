@@ -22,23 +22,23 @@ jobs:
   show-environment:
     needs: [define-environment]
     runs-on: ubuntu-latest
-    environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
+        environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
     steps:
       - name: Show Environment
         run: |
           echo "Environment is ${{ needs.define-environment.outputs.environment }}"
   
-  deploy_sites:
-    needs: [define-environment]
-    uses: ./.github/workflows/package.yml
-    with:
-      package: sites-graphql
-      enviroment: ${{ needs.define-environment.outputs.environment }}
-    secrets: inherit
+  # deploy_sites:
+  #   needs: [define-environment]
+  #   uses: ./.github/workflows/package.yml
+  #   with:
+  #     package: sites-graphql
+  #     enviroment: ${{ needs.define-environment.outputs.environment }}
+  #   secrets: inherit
 
-  deploy_authorizer:
-    uses: ./.github/workflows/package.yml
-    with:
-      package: authorizer
-      enviroment: ${{ needs.define-environment.outputs.environment }}
-    secrets: inherit
+  # deploy_authorizer:
+  #   uses: ./.github/workflows/package.yml
+  #   with:
+  #     package: authorizer
+  #     enviroment: ${{ needs.define-environment.outputs.environment }}
+  #   secrets: inherit
