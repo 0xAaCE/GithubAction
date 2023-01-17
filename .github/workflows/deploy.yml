@@ -9,19 +9,20 @@ on:
 jobs:
   define-environment:
     runs-on: ubuntu-latest
-    environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
+    outputs:
+      environment: ${{ steps.define.outputs.environment }}
     steps:
       - name: Define Environment
+        id: define
         run: |
-          echo "{environment}={$ENVIROMENT_TO_SET}" >> $GITHUB_OUTPUT
+          echo "environment=$ENVIROMENT_TO_SET" >> $GITHUB_OUTPUT
           echo "Environment is $ENVIROMENT_TO_SET"
         env:
           ENVIROMENT_TO_SET: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
 
   show-environment:
-    needs: [define-environment]
+    needs: define-environment
     runs-on: ubuntu-latest
-    environment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
     steps:
       - name: Show Environment
         run: |
@@ -38,6 +39,7 @@ jobs:
   #   secrets: inherit
 
   # deploy_authorizer:
+  #   needs: [define-environment]
   #   uses: ./.github/workflows/package.yml
   #   with:
   #     package: authorizer
