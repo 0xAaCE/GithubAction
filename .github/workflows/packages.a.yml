@@ -14,7 +14,7 @@ jobs:
     env:
       DOPPLER_TOKEN: "este es mi doppler token dev"
     steps:
-    name: 'Publish'
-    run: |
-      echo "Publishing authorizer ..."
-      echo ${{ secrets.DOPPLER_TOKEN }}
+      - name: 'Publish'
+        run: |
+          echo "Publishing authorizer ..."
+          echo ${{ secrets.DOPPLER_TOKEN }}
