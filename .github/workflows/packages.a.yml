@@ -1,0 +1,20 @@
+name: 'Deploy authorizer'
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/authorizer/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      DOPPLER_TOKEN: "este es mi doppler token dev"
+    steps:
+    name: 'Publish'
+    run: |
+      echo "Publishing authorizer ..."
+      echo ${{ secrets.DOPPLER_TOKEN }}

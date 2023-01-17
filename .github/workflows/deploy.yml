@@ -1,0 +1,28 @@
+name: 'Publish package into NPM registry'
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Name of package to publish'
+        required: true
+        type: choice
+        options:
+          - cli
+          - sdk
+      version:
+        description: 'Semantic version of newly published package'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      DOPPLER_TOKEN: "este es mi doppler token dev"
+  steps:
+    name: 'Publish'
+    run: |
+      echo "Publishing sites-graphql ..."
+      echo ${{ secrets.DOPPLER_TOKEN }}

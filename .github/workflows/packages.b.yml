@@ -1,0 +1,21 @@
+name: 'Deploy sites-graphql'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/sites-graphql/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      DOPPLER_TOKEN: "este es mi doppler token dev"
+  steps:
+    name: 'Publish'
+    run: |
+      echo "Publishing sites-graphql ..."
+      echo ${{ secrets.DOPPLER_TOKEN }}
