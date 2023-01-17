@@ -7,30 +7,16 @@ on:
       - main
 
 jobs:
-  check_run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 'Check run'
-        env:
-          githubEventName: ${{ github.event_name }}
-          githubEventPath: ${{ github.event_path }}
-          enviroment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
-        run: |
-          echo "githubEventName: $githubEventName"
-          echo "githubEventPath: $githubEventPath"
-          echo "enviroment: $enviroment"
-
   deploy_sites:
     uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
       enviroment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
-    secrets:
-      token: este es mi doppler token dev
+    secrets: inherit
+
   deploy_authorizer:
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
       enviroment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
-    secrets:
-      token: este es mi doppler token dev
+    secrets: inherit

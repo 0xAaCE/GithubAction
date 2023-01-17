@@ -10,14 +10,15 @@ on:
         required: true
         type: string
     secrets:
-      token:
+      DOPPLER_TOKEN:
         required: true
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    enviroment: ${{ inputs.enviroment }}
     env:
-      DOPPLER_TOKEN: ${{ secrets.token }}
+      DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       PACKAGE: ${{ inputs.package }}
       ENVIROMENT: ${{ inputs.enviroment }}
     steps:
@@ -26,3 +27,11 @@ jobs:
           echo "Publishing $PACKAGE ..."
           echo $DOPPLER_TOKEN
           echo $ENVIROMENT
+      - name: Dump DOPPLER_TOKEN
+        run: |
+          echo DOPPLER_TOKEN is $DOPPLER_TOKEN
+          if [[ $DOPPLER_TOKEN == *"PROD"* ]]; then
+            echo "This is the PROD DOPPLER_TOKEN!"
+          else
+            echo "This is NOT the PROD DOPPLER_TOKEN!"
+          fi
