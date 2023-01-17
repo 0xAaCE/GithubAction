@@ -2,27 +2,32 @@ name: 'Publish package into NPM registry'
 
 on:
   workflow_dispatch:
-    inputs:
-      package:
-        description: 'Name of package to publish'
-        required: true
-        type: choice
-        options:
-          - cli
-          - sdk
-      version:
-        description: 'Semantic version of newly published package'
-        required: true
-        type: string
+  push:
+  branches:
+    - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    environment: development
+  check run:
     env:
-      DOPPLER_TOKEN: "este es mi doppler token dev"
-    steps:
-      - name: 'Publish'
-        run: |
-          echo "Publishing sites-graphql ..."
-          echo $DOPPLER_TOKEN
+      github: ${{ github }}
+      githubEvent: ${{ github.event }}
+      githubEventName: ${{ github.event_name }}
+      githubEventPath: ${{ github.event_path }}
+    run: |
+      echo "github: $github"
+      echo "githubEvent: $githubEvent"
+      echo "githubEventName: $githubEventName"
+      echo "githubEventPath: $githubEventPath"
+
+  deploy sites:
+    uses: ./.github/workflows/package.yml
+    with:
+      package: sites-graphql
+    secrets:
+      token: este es mi doppler token dev
+  deploy authorizer:
+    uses: ./.github/workflows/package.yml
+    with:
+      package: authorizer
+    secrets:
+      token: este es mi doppler token dev
