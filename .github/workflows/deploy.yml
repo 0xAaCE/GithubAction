@@ -25,7 +25,9 @@ jobs:
     steps:
       - name: Show Environment
         run: |
-          echo "Environment is ${{ needs.define-environment.outputs.environment }}"
+          echo "Environment is $SETTED_ENVIRONMENT"
+        env:
+          SETTED_ENVIRONMENT: ${{ needs.define-environment.outputs.environment }}
   
   # deploy_sites:
   #   needs: [define-environment]
