@@ -1,4 +1,4 @@
-name: 'Deploy sites-graphql package'
+name: 'Deploy sites-graphql'
 
 on:
   workflow_dispatch:

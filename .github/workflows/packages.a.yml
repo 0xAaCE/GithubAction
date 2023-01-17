@@ -1,4 +1,4 @@
-name: 'Deploy authorizer package'
+name: 'Deploy authorizer'
 
 on:
   push:
