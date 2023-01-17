@@ -4,17 +4,11 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'packages/authorizer/**'
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    environment: development
-    env:
-      DOPPLER_TOKEN: "este es mi doppler token dev"
-    steps:
-      - name: 'Publish'
-        run: |
-          echo "Publishing authorizer ..."
-          echo $DOPPLER_TOKEN
+    uses: ./reusable-workflow.yml
+    with:
+      package: authorizer
+    secrets:
+      token: este es mi doppler token dev

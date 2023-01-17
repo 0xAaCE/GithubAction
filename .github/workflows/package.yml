@@ -1,0 +1,24 @@
+name: Reusable package deployer
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+    env:
+      DOPPLER_TOKEN: ${{ secrets.token }}
+      PACKAGE: ${{ inputs.package }}
+    steps:
+      - name: 'Publish'
+        run: |
+          echo "Publishing $PACKAGE ..."
+          echo $DOPPLER_TOKEN
