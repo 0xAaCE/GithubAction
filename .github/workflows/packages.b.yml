@@ -18,4 +18,4 @@ jobs:
       - name: 'Publish'
         run: |
           echo "Publishing sites-graphql ..."
-          echo ${{ secrets.DOPPLER_TOKEN }}
+          echo $DOPPLER_TOKEN

@@ -17,4 +17,4 @@ jobs:
       - name: 'Publish'
         run: |
           echo "Publishing authorizer ..."
-          echo ${{ secrets.DOPPLER_TOKEN }}
+          echo $DOPPLER_TOKEN
