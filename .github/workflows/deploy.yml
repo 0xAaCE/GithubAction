@@ -40,7 +40,7 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
-      enviroment: ${{ needs.define-environment.outputs.environment }}
+      environment: ${{ needs.define-environment.outputs.environment }}
     secrets: inherit
 
   deploy_authorizer:
@@ -48,5 +48,5 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
-      enviroment: ${{ needs.define-environment.outputs.environment }}
+      environment: ${{ needs.define-environment.outputs.environment }}
     secrets: inherit
