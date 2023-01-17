@@ -12,13 +12,9 @@ jobs:
     steps:
       - name: 'Check run'
         env:
-          github: ${{ github }}
-          githubEvent: ${{ github.event }}
           githubEventName: ${{ github.event_name }}
           githubEventPath: ${{ github.event_path }}
         run: |
-          echo "github: $github"
-          echo "githubEvent: $githubEvent"
           echo "githubEventName: $githubEventName"
           echo "githubEventPath: $githubEventPath"
 
