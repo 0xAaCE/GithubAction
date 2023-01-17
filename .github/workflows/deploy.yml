@@ -14,9 +14,18 @@ jobs:
       - name: Define Environment
         run: |
           echo "::set-output name=environment::$ENVIROMENT_TO_SET"
+          echo "Environment is $ENVIROMENT_TO_SET"
         env:
           ENVIROMENT_TO_SET: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
 
+  show-environment:
+    needs: [define-environment]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Environment
+        run: |
+          echo "Environment is ${{ needs.define-environment.outputs.environment }}"
+  
   deploy_sites:
     needs: [define-environment]
     uses: ./.github/workflows/package.yml
