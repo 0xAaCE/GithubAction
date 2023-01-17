@@ -11,5 +11,5 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
-      enviroment: development
+      environment: development
     secrets: inherit

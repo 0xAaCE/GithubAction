@@ -7,16 +7,24 @@ on:
       - main
 
 jobs:
+
+  define-environment:
+    steps:
+      - name: Define Environment
+        run: |
+          echo "::set-output name=environment::${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}"
+
   deploy_sites:
+    needs: [define-environment]
     uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
-      enviroment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
+      enviroment: ${{ needs.define-environment.outputs.environment }}
     secrets: inherit
 
   deploy_authorizer:
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
-      enviroment: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
+      enviroment: ${{ needs.define-environment.outputs.environment }}
     secrets: inherit

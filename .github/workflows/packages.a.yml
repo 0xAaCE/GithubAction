@@ -10,5 +10,5 @@ jobs:
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
-      enviroment: development
+      environment: development
     secrets: inherit

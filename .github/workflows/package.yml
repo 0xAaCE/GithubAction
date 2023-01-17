@@ -6,7 +6,7 @@ on:
       package:
         required: true
         type: string
-      enviroment:
+      environment:
         required: true
         type: string
     secrets:
@@ -16,17 +16,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.enviroment }}
+    environment: ${{ inputs.environment }}
     env:
       DOPPLER_TOKEN: ${{ secrets.DOPPLER_TOKEN }}
       PACKAGE: ${{ inputs.package }}
-      ENVIROMENT: ${{ inputs.enviroment }}
+      ENVIRONMENT: ${{ inputs.environment }}
     steps:
       - name: 'Publish'
         run: |
           echo "Publishing $PACKAGE ..."
           echo $DOPPLER_TOKEN
-          echo $ENVIROMENT
+          echo $ENVIRONMENT
       - name: Dump DOPPLER_TOKEN
         run: |
           echo DOPPLER_TOKEN is $DOPPLER_TOKEN
