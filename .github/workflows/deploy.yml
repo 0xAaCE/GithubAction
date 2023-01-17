@@ -36,7 +36,7 @@ jobs:
           SETTED_ENVIRONMENT: ${{ needs.define-environment.outputs.environment }}
   
   deploy_sites:
-    needs: [define-environment]
+    needs: define-environment
     uses: ./.github/workflows/package.yml
     with:
       package: sites-graphql
@@ -44,7 +44,7 @@ jobs:
     secrets: inherit
 
   deploy_authorizer:
-    needs: [define-environment]
+    needs: define-environment
     uses: ./.github/workflows/package.yml
     with:
       package: authorizer
