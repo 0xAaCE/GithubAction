@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Define Environment
         run: |
-          echo "::set-output name=environment::$ENVIROMENT_TO_SET"
+          echo "{environment}={$ENVIROMENT_TO_SET}" >> $GITHUB_OUTPUT
           echo "Environment is $ENVIROMENT_TO_SET"
         env:
           ENVIROMENT_TO_SET: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
