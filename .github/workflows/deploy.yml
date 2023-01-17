@@ -9,10 +9,13 @@ on:
 jobs:
 
   define-environment:
+    runs-on: ubuntu-latest
     steps:
       - name: Define Environment
         run: |
-          echo "::set-output name=environment::${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}"
+          echo "::set-output name=environment::$ENVIROMENT_TO_SET"
+        env:
+          ENVIROMENT_TO_SET: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
 
   deploy_sites:
     needs: [define-environment]
