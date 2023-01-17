@@ -15,10 +15,15 @@ jobs:
       - name: Define Environment
         id: define
         run: |
-          echo "environment=$ENVIROMENT_TO_SET" >> $GITHUB_OUTPUT
-          echo "Environment is $ENVIROMENT_TO_SET"
+          if [[ $GITHUB_REF == *"main"* ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+            echo "Environment is production"
+          else
+            echo "environment=development" >> $GITHUB_OUTPUT
+            echo "Environment is development"
+          fi
         env:
-          ENVIROMENT_TO_SET: ${{ (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') && 'production' || 'development' }}
+          GITHUB_REF: ${{ github.ref }}
 
   show-environment:
     needs: define-environment
@@ -30,18 +35,18 @@ jobs:
         env:
           SETTED_ENVIRONMENT: ${{ needs.define-environment.outputs.environment }}
   
-  # deploy_sites:
-  #   needs: [define-environment]
-  #   uses: ./.github/workflows/package.yml
-  #   with:
-  #     package: sites-graphql
-  #     enviroment: ${{ needs.define-environment.outputs.environment }}
-  #   secrets: inherit
+  deploy_sites:
+    needs: [define-environment]
+    uses: ./.github/workflows/package.yml
+    with:
+      package: sites-graphql
+      enviroment: ${{ needs.define-environment.outputs.environment }}
+    secrets: inherit
 
-  # deploy_authorizer:
-  #   needs: [define-environment]
-  #   uses: ./.github/workflows/package.yml
-  #   with:
-  #     package: authorizer
-  #     enviroment: ${{ needs.define-environment.outputs.environment }}
-  #   secrets: inherit
+  deploy_authorizer:
+    needs: [define-environment]
+    uses: ./.github/workflows/package.yml
+    with:
+      package: authorizer
+      enviroment: ${{ needs.define-environment.outputs.environment }}
+    secrets: inherit
