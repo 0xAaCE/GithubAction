@@ -1,0 +1,26 @@
+name: 'Reusable define-environment'
+
+on: workflow_call
+
+jobs:
+  define-environment:
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.define.outputs.environment }}
+    steps:
+      - name: Define Environment
+        id: define
+        run: |
+          if [[ GITHUB_EVENT_NAME == "push" && $GITHUB_REF == *"master"* ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+            echo "Environment is production"
+          elif [[ GITHUB_EVENT_NAME == "workflow_dispatch" && $GITHUB_REF == *"master"* ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+            echo "Environment is production"
+          else
+            echo "environment=development" >> $GITHUB_OUTPUT
+            echo "Environment is development"
+          fi
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}

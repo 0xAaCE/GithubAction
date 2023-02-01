@@ -8,22 +8,7 @@ on:
 
 jobs:
   define-environment:
-    runs-on: ubuntu-latest
-    outputs:
-      environment: ${{ steps.define.outputs.environment }}
-    steps:
-      - name: Define Environment
-        id: define
-        run: |
-          if [[ $GITHUB_REF == *"main"* ]]; then
-            echo "environment=production" >> $GITHUB_OUTPUT
-            echo "Environment is production"
-          else
-            echo "environment=development" >> $GITHUB_OUTPUT
-            echo "Environment is development"
-          fi
-        env:
-          GITHUB_REF: ${{ github.ref }}
+    uses: ./.github/workflows/define-environment.yml
 
   show-environment:
     needs: define-environment
