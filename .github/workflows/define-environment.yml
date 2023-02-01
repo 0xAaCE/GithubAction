@@ -1,6 +1,11 @@
 name: 'Reusable define-environment'
 
-on: workflow_call
+on: 
+  workflow_call:
+    outputs:
+      environment:
+        description: "Environment defined by this job"
+        value: {{ jobs.define-environment.outputs.environment }}
 
 jobs:
   define-environment:
