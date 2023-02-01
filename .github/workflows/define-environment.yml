@@ -5,7 +5,7 @@ on:
     outputs:
       environment:
         description: "Environment defined by this job"
-        value: {{ jobs.define-environment.outputs.environment }}
+        value: ${{ jobs.define-environment.outputs.environment }}
 
 jobs:
   define-environment:
