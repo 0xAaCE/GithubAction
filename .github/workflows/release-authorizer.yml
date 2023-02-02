@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: ls -a
+      - run: ls -a packages
+      - run: ls -a packages/authorizer
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: node
