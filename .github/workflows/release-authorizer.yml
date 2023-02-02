@@ -20,3 +20,7 @@ jobs:
           release-type: node
           monorepo-tags: true
           path: packages/authorizer
+        
+permissions:
+  contents: write
+  pull-requests: write
