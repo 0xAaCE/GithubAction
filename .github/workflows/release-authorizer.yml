@@ -6,7 +6,6 @@ on:
       - main
     path:
       - packages/authorizer
-name: release-please
 
 jobs:
   release-please:
