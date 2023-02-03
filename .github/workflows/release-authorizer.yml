@@ -16,10 +16,13 @@ jobs:
       - run: ls -a packages
       - run: ls -a packages/authorizer
       - uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: node
           monorepo-tags: true
           path: packages/authorizer
+      - run: echo "PUBLISHING"
+        if: ${{ steps.release.outputs.release_created }}
         
 permissions:
   contents: write
