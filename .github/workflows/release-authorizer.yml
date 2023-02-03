@@ -5,7 +5,7 @@ on:
     branches:
       - main
     path:
-      - packages/authorizer
+      - packages/authorizer/**
 
 jobs:
   release-please:
